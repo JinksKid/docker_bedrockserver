@@ -3,15 +3,6 @@
 A Docker image and docker-compose file to run one or more instances of a native Minecraft Bedrock server using codehz/mcpeserver in an ArchLinux environment wth systemd.
 
 
-## Background
-
-My kids wanted a Minecraft (Bedrock) server so that they can play the same worlds on any of their devices at home.  Fortunately, Minecraft finally released an alpha version of a server for Bedrock edition.  See https://minecraft.net/en-us/download/server/bedrock/.
-
-This worked well for a single server, but my kids each have their own worlds they want to serve, and they want to be able to bring these up and down quickly.  Long story short, for various reasons, I decided it was time to teach myself about Docker, and run the servers in a docker image.
-
-*So this is one of my first Docker projects.  Don't be too hard on me if I'm doing something terribly wrong.*
-
-
 ## Prerequisites
 
 - Docker
@@ -26,30 +17,24 @@ This worked well for a single server, but my kids each have their own worlds the
 1. Pull the docker image.
 
 ```
-docker pull karlrees/docker_bedrockserver
+docker pull jinkskid/docker_bedrockserver
 ```
 
 2. Start the docker container.
 
 ```
-docker run -d --network="host" karlrees/docker_bedrockserver
+docker run -d --network="host" jinkskid/docker_bedrockserver
 ```
-
-Unfortunately, I'm not entirely sure I understand how docker volumes work.  I think it's probable that with the above, *you will lose your world* if you ever have to create a new container or update the docker image (e.g. for a new server version).  One way to get around this, *may* be to give a fixed name the worlds folder as follows:
 
 ```
 docker run -d --network="host" -v worlds:/srv/bedrockserver/worlds karlrees/docker_bedrockserver
 ```
 
-It seems to work in a few test cases that I've tried, but I'm not confident enough with that solution, however, to rely on it myself.  Instead, I would mount a worlds folder from the host system as follows:
 
 ```
 docker run -d --network="host" -v /path/to/worlds/folder:/srv/bedrockserver/worlds karlrees/docker_bedrockserver
 ```
 
-This has the added benefit of giving you easy access to the worlds folder so that you can create backups.
-
-Unfortunately, I can't get this to work with an external volume on Windows.  For some reason the server suffers a fatal error.  So you have to go with the second option instead.  Unless someone has a better idea of how things work and would like to share it...
 
 ### Single-server / Existing world
 
@@ -64,7 +49,7 @@ Unfortunately, I can't get this to work with an external volume on Windows.  For
 7. Start docker container as shown below, replacing "worldname" with whatever your "world" folder is named, and "/path/to/world/folder" with the absolute path to your parent worlds folder:
 
 ```
-docker run -e WORLD=worldname -v /path/to/worlds/folder:/srv/mcpeserver/worlds -d --network="host" karlrees/docker_bedrockserver
+docker run -e WORLD=worldname -v /path/to/worlds/folder:/srv/mcpeserver/worlds -d --network="host" jinkskid/docker_bedrockserver
 ```
 
 ### Multiple existing worlds / docker-compose
@@ -74,7 +59,7 @@ docker run -e WORLD=worldname -v /path/to/worlds/folder:/srv/mcpeserver/worlds -
 1. Download the source code from git
 
 ```
-git clone https://github.com/karlrees/docker_bedrockserver
+git clone https://github.com/jinkskid/docker_bedrockserver
 ```
 
 2. Complete steps 1-6 above, using the worlds folder in the source code as the parent "worlds" folder.  Repeat steps 3-6 for each world you wish to serve.
@@ -87,7 +72,6 @@ docker-compose up -d
 ```
 
 
-*Sorry for any confusing instructions.  Just thought it'd be better to share with terse instructions than not at all.*
 
 ## Known Issues
 
