@@ -27,12 +27,12 @@ docker run -d --network="host" jinkskid/docker_bedrockserver
 ```
 
 ```
-docker run -d --network="host" -v worlds:/srv/bedrockserver/worlds karlrees/docker_bedrockserver
+docker run -d --network="host" -v worlds:/srv/bedrockserver/worlds jinkskid/docker_bedrockserver
 ```
 
 
 ```
-docker run -d --network="host" -v /path/to/worlds/folder:/srv/bedrockserver/worlds karlrees/docker_bedrockserver
+docker run -d --network="host" -v /path/to/worlds/folder:/srv/bedrockserver/worlds jinkskid/docker_bedrockserver
 ```
 
 
