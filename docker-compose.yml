@@ -6,7 +6,7 @@ x-mcserver-common:
    context: .
    args:
     INSTALLERURL: ${INSTALLERURL:-https://minecraft.azureedge.net/bin-linux/bedrock-server-1.11.4.2.zip}
-  image: ${DOCKERIMAGENAME:-karlrees/docker_bedrockserver}
+  image: ${DOCKERIMAGENAME:-jinkskid/docker_bedrockserver}
   volumes:
   - ${WORLDSFOLDER:-./worlds}:/srv/bedrockserver/worlds
   restart: always
